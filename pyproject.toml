@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mlx-profiler"
+version = "0.1.0"
+description = "Operation-level profiler for Apple Silicon / MLX"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+keywords = ["mlx", "apple-silicon", "profiler", "metal", "deep-learning"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Environment :: MacOS X",
+]
+
+dependencies = []
+
+[project.optional-dependencies]
+mlx = ["mlx>=0.18"]
+dev = ["pytest", "black", "ruff"]
+
+[project.scripts]
+mlx-profiler = "mlx_profiler.cli:main"
+
+[project.urls]
+Repository = "https://github.com/yourusername/mlx-profiler"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mlx_profiler*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
