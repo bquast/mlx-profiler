@@ -1,8 +1,8 @@
 # mlx-profiler
 
-Operation-level profiler for Apple Silicon / MLX. The missing `torch.profiler` equivalent for the MLX ecosystem.
+Operation-level profiler for Apple Silicon / MLX, a  `torch.profiler` equivalent for the MLX ecosystem.
 
-## What it gives you
+## features
 
 - **Op-level timing** — every `matmul`, `softmax`, `rms_norm`, layer call, etc., measured individually
 - **FLOPs estimation** — multiply-add counts for matmuls, convolutions
@@ -13,14 +13,14 @@ Operation-level profiler for Apple Silicon / MLX. The missing `torch.profiler` e
 - **Interactive HTML dashboard** — flame timeline, roofline scatter, searchable op table, category donut
 - **Trace persistence** — save/load JSON, render HTML from CLI
 
-## Install
+## install
 
 ```bash
 pip install mlx-profiler          # without MLX (manual recording only)
 pip install "mlx-profiler[mlx]"   # with MLX for automatic interception
 ```
 
-## Quick start
+## quick start
 
 ```python
 import mlx.core as mx
@@ -52,7 +52,7 @@ mlx-profiler view trace.json
 mlx-profiler html trace.json -o report.html
 ```
 
-## Manual op recording (no MLX required)
+## manual op recording (no MLX required)
 
 ```python
 from mlx_profiler.trace import Trace
@@ -70,7 +70,7 @@ with op_timer(trace, "matmul",
 mp.print_report(trace)
 ```
 
-## What's measured
+## output
 
 | Op | FLOPs formula | Notes |
 |---|---|---|
@@ -78,7 +78,7 @@ mp.print_report(trace)
 | `conv2d` | 2·Ho·Wo·Co·Ci·Kh·Kw | per batch element |
 | All ops | input + output tensor bytes | memory bandwidth estimate |
 
-## Design notes
+## design notes
 
 **Why wall-clock, not Metal GPU timers?**
 
@@ -88,7 +88,7 @@ Metal's `MTLCommandBuffer.GPUStartTime` gives you true on-chip execution time bu
 
 MLX uses lazy evaluation — operations aren't executed until `mx.eval()` is called. The profiler inserts `mx.eval()` calls at layer boundaries to force materialization and get accurate per-layer timing. This means profiling adds overhead; real-world timings will be slightly slower than unproduced runs.
 
-## Roadmap
+## roadmap
 
 - [ ] Metal GPU timestamp counters (true on-chip time)
 - [ ] Neural Engine vs GPU attribution via `os_signpost`
@@ -98,6 +98,6 @@ MLX uses lazy evaluation — operations aren't executed until `mx.eval()` is cal
 - [ ] TurboQuant / quantized op analysis
 - [ ] Comparison mode: profile A vs profile B
 
-## License
+## license
 
 MIT
