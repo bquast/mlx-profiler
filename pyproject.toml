@@ -39,3 +39,4 @@ include = ["mlx_profiler*"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
