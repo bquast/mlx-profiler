@@ -647,3 +647,4 @@ def _fmt_flops_html(f: int) -> str:
     if f < 1e12:
         return f"{f/1e9:.2f}G"
     return f"{f/1e12:.2f}T"
+
