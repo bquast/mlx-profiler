@@ -100,4 +100,4 @@ MLX uses lazy evaluation — operations aren't executed until `mx.eval()` is cal
 
 ## license
 
-MIT
+[MIT](https://opensource.org/license/mit)
